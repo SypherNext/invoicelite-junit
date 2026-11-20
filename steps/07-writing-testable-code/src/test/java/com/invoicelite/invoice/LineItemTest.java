@@ -1,0 +1,41 @@
+package com.invoicelite.invoice;
+
+import com.invoicelite.money.Money;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
+class LineItemTest {
+
+    private static final Money MUG_PRICE = Money.of("12.50", "EUR");
+
+    @Test
+    void total_is_unit_price_times_quantity() {
+        // Arrange
+        LineItem mugs = new LineItem("MUG-01", "Enamel mug", MUG_PRICE, 4);
+
+        // Act
+        Money total = mugs.total();
+
+        // Assert
+        assertThat(total).isEqualTo(Money.of("50.00", "EUR"));
+    }
+
+    @Test
+    void rejects_a_quantity_below_one() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new LineItem("MUG-01", "Enamel mug", MUG_PRICE, 0))
+                .withMessage("Quantity must be at least 1, was 0");
+    }
+
+    @Test
+    void rejects_a_blank_sku() {
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> new LineItem(" ", "Enamel mug", MUG_PRICE, 1))
+                .withMessageContaining("SKU");
+    }
+}

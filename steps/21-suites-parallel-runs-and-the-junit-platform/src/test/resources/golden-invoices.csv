@@ -1,0 +1,7 @@
+# name;country;tax rounding;lines (SKU price xQuantity);discount percent;subtotal;discount;tax;total
+mugs and pens, 10 percent off;DE;PER_INVOICE;MUG-01 12.50 x4, PEN-10 6.40 x2;10;62.80;6.28;10.74;67.26
+three clips, rounded per line;DE;PER_LINE;CLIP-01 0.25 x1, CLIP-02 0.25 x1, CLIP-03 0.25 x1;0;0.75;0.00;0.15;0.90
+three clips, rounded per invoice;DE;PER_INVOICE;CLIP-01 0.25 x1, CLIP-02 0.25 x1, CLIP-03 0.25 x1;0;0.75;0.00;0.14;0.89
+four office chairs, 5 percent off;FR;PER_INVOICE;CHAIR-07 249.00 x4;5;996.00;49.80;189.24;1135.44
+desk and lamps, 15 percent off;NL;PER_LINE;DESK-02 399.99 x1, LAMP-03 34.95 x3;15;504.84;75.73;90.12;519.23
+ten reams of paper;IE;PER_INVOICE;PAPER-A4 4.99 x10;0;49.90;0.00;11.48;61.38

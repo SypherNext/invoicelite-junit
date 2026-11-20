@@ -1,0 +1,37 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+
+plugins {
+    java
+}
+
+group = "com.invoicelite"
+version = "1.0.0"
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation(platform("org.junit:junit-bom:6.1.3"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("org.assertj:assertj-core:3.27.7")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+tasks.test {
+    useJUnitPlatform {
+        // Run a subset with a tag expression, for example: ./gradlew test -Ptags='!slow'
+        providers.gradleProperty("tags").orNull?.let { includeTags(it) }
+    }
+    testLogging {
+        events("passed", "skipped", "failed")
+        exceptionFormat = TestExceptionFormat.FULL
+        showStandardStreams = true
+    }
+}
